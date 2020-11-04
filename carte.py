@@ -39,7 +39,28 @@ class Carte:
 
     def __repr__(self):
         return f"<{self.valeur} de {self.couleur}>"
+
+    def __eq__(self, carte2):
+        return self.couleur == carte2.couleur and self.valeur == carte2.valeur
+
+    def __iter__(self):
+        return iterateur_cartes(self)
         
+class iterateur_cartes:
+
+    def __init__(self, carte):
+        self.liste_cartes = [Carte(valeur, couleur) for valeur in Carte.valeurs_valides 
+            for couleur in Carte.couleurs_valides]
+        self.index = self.liste_cartes.index(carte)
+
+    def __next__(self):
+        if self.index+1 == len(self.liste_cartes):
+            raise StopIteration
+        return self.liste_cartes[self.index+1]
+
+    def __iter__(self):
+        return self
+
 
 if __name__ == "__main__":
     maCarte = Carte("ROI", "COEUR")

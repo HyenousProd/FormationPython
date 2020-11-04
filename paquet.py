@@ -18,13 +18,20 @@ class Paquet:
         return len(self.cartes)
 
     def __getitem__(self, index:int):
-        if index > len(self):
-            raise Exception(IndexError)
         return self.cartes[index]
+
+    def __setitem__(self, index:int, carte):
+        self.cartes[index] = carte
+
+    def __repr__(self):
+        return(str(self.cartes))
+
+    def __iter__(self):
+        return iter(self.cartes)
 
 
 if __name__ == "__main__":
     monPaquet = Paquet()
     #print(monPaquet.cartes)
     print(len(monPaquet))
-    print(monPaquet[18])
+    print(monPaquet[51])
